@@ -21,7 +21,7 @@ public class FixedThreadPool implements ThreadPool {
     public void start( ) {
         IntStream.range( 0, threadCount )
                 .mapToObj( i -> new Thread( new TaskExecutor( tasks ) ) )
-                .peek( i -> System.out.println( "Executor " + i.getName() + " started!" ) )
+//                .peek( i -> System.out.println( "Executor " + i.getName() + " started!" ) )
                 .forEach( Thread::start );
 
         try {
