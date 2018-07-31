@@ -8,10 +8,13 @@ public class Test {
         threadPool.start();
 
         int cores = 4 * Runtime.getRuntime().availableProcessors();
+        System.out.println( "Cores * 4: " + cores );
         for ( int i = 0; i < cores; i++ ) {
             final int numberTask = i;
             threadPool.execute( () -> heavyCalc( numberTask ) );
         }
+
+        threadPool.shutdown();
     }
 
     public static void heavyCalc( int numberTask ) {
