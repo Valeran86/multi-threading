@@ -1,4 +1,4 @@
-package ru.sbt.mth.ru.sbt.mth.tasks;
+package ru.sbt.mth.tasks;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 

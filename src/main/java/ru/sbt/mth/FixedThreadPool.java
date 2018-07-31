@@ -1,7 +1,7 @@
 package ru.sbt.mth;
 
-import ru.sbt.mth.ru.sbt.mth.tasks.TaskCreator;
-import ru.sbt.mth.ru.sbt.mth.tasks.TaskExecutor;
+import ru.sbt.mth.tasks.TaskCreator;
+import ru.sbt.mth.tasks.TaskExecutor;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.IntStream;

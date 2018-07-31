@@ -1,4 +1,4 @@
-package ru.sbt.mth.ru.sbt.mth.tasks;
+package ru.sbt.mth.tasks;
 
 public class Task implements Runnable {
     @Override
