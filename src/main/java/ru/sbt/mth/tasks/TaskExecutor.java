@@ -1,34 +1,37 @@
 package ru.sbt.mth.tasks;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.Queue;
 
 public class TaskExecutor implements Runnable {
     private int taskExecuted = 0;
-    private ConcurrentLinkedQueue<Runnable> tasks;
+    private final Queue< Runnable > tasks;
 
-    public TaskExecutor( ConcurrentLinkedQueue<Runnable> tasks ) {
+    public TaskExecutor( Queue< Runnable > tasks ) {
         this.tasks = tasks;
     }
 
     @Override
-    public void run( ) {
+    public void run() {
         print( "Started..." );
         Runnable task;
         while ( !Thread.currentThread().isInterrupted() ) {
-            try {
+            synchronized ( tasks ) {
                 task = tasks.poll();
                 if ( task != null ) {
                     print( "run task..." );
                     task.run();
                     taskExecuted++;
                 } else {
-                    print( "tasks not exists. total executed (" + taskExecuted + "). now sleep..." );
-                    Thread.sleep( 4000 );
+                    try {
+                        print( "tasks not exists. total executed (" + taskExecuted + "). waiting..." );
+                        tasks.wait();
+                    } catch ( InterruptedException e ) {
+                        break;
+                    }
                 }
-            } catch ( InterruptedException e ) {
-                e.printStackTrace();
             }
         }
+        print( "INTERRUPTED! break thread!" );
     }
 
     private void print( String message ) {
