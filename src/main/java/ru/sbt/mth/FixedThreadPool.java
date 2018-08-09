@@ -51,18 +51,27 @@ public class FixedThreadPool implements ThreadPool {
                         if ( FixedThreadPool.this.tasks.size() == 0 )
                             FixedThreadPool.this.wait();
                     } catch ( InterruptedException e ) {
+
                         e.printStackTrace( System.out );
                         Thread.currentThread().interrupt();
                     }
                 }
 
                 Runnable task;
+
                 synchronized ( FixedThreadPool.this ) {
                     //TODO why it works after shutdown?
-                    task = FixedThreadPool.this.tasks.get( 0 );
-                    FixedThreadPool.this.tasks.remove( task );
+
+                    if (FixedThreadPool.this.tasks.size()>0) {
+                        task = FixedThreadPool.this.tasks.get( 0 );
+                        FixedThreadPool.this.tasks.remove( task );
+                        task.run();
+                    }
                 }
-                task.run();
+
+
+
+            //    System.out.println( "Задача завершена" );
             }
         }
     }

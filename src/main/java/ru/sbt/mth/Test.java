@@ -1,10 +1,10 @@
 package ru.sbt.mth;
 
-public class Test {
+public class   Test {
     static final int CALC_COUNT = 1000000;
 
     public static void main( String... args ) {
-        ThreadPool threadPool = new FixedThreadPool();
+        ThreadPool threadPool = new ScalableThreadPool();
         threadPool.start();
 
         int cores = 4 * Runtime.getRuntime().availableProcessors();
@@ -25,5 +25,7 @@ public class Test {
 
         System.out.println( "task: " + numberTask + " a=" + a +
                 " from thread:" + Thread.currentThread().getName() );
+
+
     }
 }
