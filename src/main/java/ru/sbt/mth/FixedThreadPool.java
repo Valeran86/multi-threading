@@ -35,6 +35,6 @@ public class FixedThreadPool implements ThreadPool {
 
     @Override
     public void execute( Runnable runnable ) {
-        runnable.run();
+        new Thread( runnable ).start();
     }
 }
